@@ -79,23 +79,23 @@
             scene.add(display);}
 
             //speaker-i
-            {var geometry = new THREE.TorusGeometry(1.5, 0.25, 16, 100); 
+            {var geometry = new THREE.TorusGeometry(1.5, 0.25, 32, 100); 
             var material = new THREE.MeshBasicMaterial({color:0xff0ff});
             var circle = new THREE.Mesh(geometry, material);
             circle.position.set(-6.5, 4, -10);
             scene.add(circle);
-            var geometry = new THREE.SphereGeometry(1, 32, 16); 
+            var geometry = new THREE.SphereGeometry(1, 32, 32); 
             var material = new THREE.MeshBasicMaterial({color:0xff0ff});
             var circle = new THREE.Mesh(geometry, material);
             circle.position.set(-6.5, 4, -10);
             scene.add(circle);
 
-            var geometry = new THREE.TorusGeometry(1, 0.15, 16, 100); 
+            var geometry = new THREE.TorusGeometry(1, 0.15, 32, 100); 
             var material = new THREE.MeshBasicMaterial({color:0xff0ff});
             var circle = new THREE.Mesh(geometry, material);
             circle.position.set(-6.5, 9, -10);
             scene.add(circle);
-            var geometry = new THREE.SphereGeometry(0.7, 32, 16); 
+            var geometry = new THREE.SphereGeometry(0.7, 32, 32); 
             var material = new THREE.MeshBasicMaterial({color:0xff0ff});
             var circle = new THREE.Mesh(geometry, material);
             circle.position.set(-6.5, 9, -10);
@@ -147,10 +147,177 @@
             /*var projector = new THREE.SpotLight(0xffffff, 5, -2);
             scene.add( projector );*/
 
+            //hora
+            function drawPerson_1(xx, y, z)
+            {
+                var pose1 = new THREE.Group();
+                scene.add( pose1 );
+
+                //glava
+                var geometry = new THREE.BoxGeometry(0.75, 0.75, 0.5);
+                var material = new THREE.MeshPhongMaterial();
+                material.color.set(0xffddd4); 
+                var head = new THREE.Mesh(geometry, material);
+                head.position.set(0, 0, 0)		
+                pose1.add(head);
+
+                //vrat
+                var geometry = new THREE.BoxGeometry(0.25, 0.25, 0.25);
+                var material = new THREE.MeshPhongMaterial();
+                material.color.set(0xffddd4); 
+                var neck = new THREE.Mesh(geometry, material);
+                neck.position.set(0, -0.5, 0)		
+                pose1.add(neck);
+
+                //tors
+                var geometry = new THREE.BoxGeometry(1, 1.75, 0.75);
+                var material = new THREE.MeshPhongMaterial();
+                material.color.set(0xfc1380); 
+                var neck = new THREE.Mesh(geometry, material);
+                neck.position.set(0, -1.5, 0)		
+                pose1.add(neck);
+                
+                for(var x=1; x>-3; x-=2)
+                {
+                    //ramo
+                    var geometry = new THREE.BoxGeometry(0.13, 0.25, 0.5);
+                    var material = new THREE.MeshPhongMaterial();
+                    material.color.set(0xffddd4); 
+                    var shoulder = new THREE.Mesh(geometry, material);
+                    shoulder.position.set(0.57*x, -0.75, 0)		
+                    pose1.add(shoulder);
+                    //ryka
+                    var geometry = new THREE.BoxGeometry(0.25, 1.5, 0.5);
+                    var material = new THREE.MeshPhongMaterial();
+                    material.color.set(0xffddd4); 
+                    var arm = new THREE.Mesh(geometry, material);
+                    arm.position.set(0.75*x, -1.37, 0)		
+                    pose1.add(arm);
+
+                    //krak
+                    var geometry = new THREE.BoxGeometry(0.37, 1.5, 0.5);
+                    var material = new THREE.MeshPhongMaterial();
+                    material.color.set(0xfc68ae); 
+                    var leg = new THREE.Mesh(geometry, material);
+                    leg.position.set(0.25*x, -3, 0)		
+                    pose1.add(leg);
+                }
+
+                scene.add(pose1);
+                pose1.position.set(xx,y,z);
+                return pose1;
+            }
+            function drawPerson_2(xx, y, z)
+            {
+                var pose2 = new THREE.Group();
+                scene.add( pose2 );
+
+                //glava
+                var geometry = new THREE.BoxGeometry(0.75, 0.75, 0.5);
+                var material = new THREE.MeshPhongMaterial();
+                material.color.set(0xffddd4); 
+                var head = new THREE.Mesh(geometry, material);
+                head.position.set(0, 0, 0)		
+                pose2.add(head);
+
+                //vrat
+                var geometry = new THREE.BoxGeometry(0.25, 0.25, 0.25);
+                var material = new THREE.MeshPhongMaterial();
+                material.color.set(0xffddd4); 
+                var neck = new THREE.Mesh(geometry, material);
+                neck.position.set(0, -0.5, 0)		
+                pose2.add(neck);
+
+                //tors
+                var geometry = new THREE.BoxGeometry(1, 1.75, 0.75);
+                var material = new THREE.MeshPhongMaterial();
+                material.color.set(0xfc1380); 
+                var tors = new THREE.Mesh(geometry, material);
+                tors.position.set(0, -1.5, 0)		
+                pose2.add(tors);
+                
+                for(var x=1; x>-3; x-=2)
+                {
+                    //ramo
+                    var geometry = new THREE.BoxGeometry(0.13, 0.25, 0.5);
+                    var material = new THREE.MeshPhongMaterial();
+                    material.color.set(0xffddd4); 
+                    var shoulder = new THREE.Mesh(geometry, material);
+                    shoulder.position.set(0.57*x, -0.75, 0)			
+                    pose2.add(shoulder);
+                    //ryka
+                    var geometry = new THREE.BoxGeometry(0.25, 1.5, 0.5);
+                    var material = new THREE.MeshPhongMaterial();
+                    material.color.set(0xffddd4); 
+                    var arm = new THREE.Mesh(geometry, material);
+                    arm.position.set(0.75*x, -0.13, 0)		
+                    pose2.add(arm);
+
+                    //krak
+                    var geometry = new THREE.BoxGeometry(0.37, 1.5, 0.5);
+                    var material = new THREE.MeshPhongMaterial();
+                    material.color.set(0xfc68ae); 
+                    var leg = new THREE.Mesh(geometry, material);
+                    leg.position.set(0.25*x, -3, 0)			
+                    pose2.add(leg);
+                }
+
+                pose2.position.set(xx,y,z);
+
+                scene.add(pose2);
+                return pose2;
+            }
+
+            {var people_1 = new THREE.Group();
+            var people_2 = new THREE.Group();
+            scene.add(people_1);
+            scene.add(people_2);  
+
+            var pos1 = drawPerson_1(4, 4, -2);
+            var pos2 = drawPerson_2(4, 5, -2);
+            people_1.add(pos1);
+            people_2.add(pos2);
+
+            var pos1 = drawPerson_1(0, 4, 2);
+            var pos2 = drawPerson_2(0, 5, 2);
+            people_1.add(pos1);
+            people_2.add(pos2);
+
+            var pos1 = drawPerson_1(8, 4, 2);
+            var pos2 = drawPerson_2(8, 5, 2);
+            people_1.add(pos1);
+            people_2.add(pos2);
+
+
+            var pos1 = drawPerson_1(-4, 4, 0);
+            var pos2 = drawPerson_2(-4, 5, 0);
+            people_1.add(pos1);
+            people_2.add(pos2);
+
+            var pos1 = drawPerson_1(12, 4, 0);
+            var pos2 = drawPerson_2(12, 5, 0);
+            people_1.add(pos1);
+            people_2.add(pos2);
+
+            people_1.rotation.y = Math.PI/4;
+            people_2.rotation.y = Math.PI/4;
+
+            scene.add(people_1);
+            scene.add(people_2);}           
+
 
             scene.background = new THREE.Color(0xadd8e6);
 			function drawFrame(t)
 			{
+                var cycle = Math.floor(t / 2000);
+                if (cycle % 2 === 0) {
+                    people_1.visible = true;
+                    people_2.visible = false;
+                } else {
+                    people_1.visible = false;
+                    people_2.visible = true;
+                }
+
 				scene.rotation.y = t/2000;
 				renderer.render( scene, camera );
 			}
