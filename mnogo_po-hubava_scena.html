@@ -305,7 +305,8 @@
             scene.add(people_1);
             scene.add(people_2);}           
 
-            function draw_one_ogradka(x, y, z)
+            //оградка
+            function draw_one_ogradka(x, y, z, i)
             {
                 var ogradka = new THREE.Group();
                 scene.add(ogradka);
@@ -316,6 +317,16 @@
                 var prychka = new THREE.Mesh(geometry, material);
                 prychka.position.set(0, 0, 0)		
                 ogradka.add(prychka);
+
+                if(i<16)
+                {
+                    var geometry = new THREE.TorusGeometry(2, 0.05, 15, 100, -1.5);
+                    var material = new THREE.MeshPhongMaterial();
+                    var vryzka = new THREE.Mesh(geometry, material);
+                    vryzka.rotation.z = 7*Math.PI/4;
+                    vryzka.position.set(1.2,2.5,0);
+                    ogradka.add(vryzka);
+                }               
 
                 var geometry = new THREE.SphereGeometry(0.3, 32, 32);
                 var material = new THREE.MeshPhongMaterial();
@@ -329,18 +340,24 @@
                 return ogradka;
             }
 
-
-            const numberOfObjects = 20;
+            const numberOfObjects = 50;
             const radius = 20;
-            for (let i = 0; i < numberOfObjects; i++) {
+            var ogradki = new THREE.Group();
+            scene.add(ogradki);
+            for (let i = 0; i < numberOfObjects/3; i++) {
                 const angle = (i / numberOfObjects) * Math.PI * 2;
-
                 const x = Math.cos(angle) * radius + 3;
                 const z = Math.sin(angle) * radius - 3;
-                draw_one_ogradka(x, 1, z);
+                var ogradka = draw_one_ogradka(x, 1, z, i);
+                ogradka.lookAt(4, 0, -4);
+                ogradki.add(ogradka);
             }
+            ogradki.rotation.y = -(1.92)*Math.PI;
+
+            
 
             scene.background = new THREE.Color(0xadd8e6);
+
 			function drawFrame(t)
 			{
                 var cycle = Math.floor(t / 2000);
