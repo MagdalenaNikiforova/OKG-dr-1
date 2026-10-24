@@ -1,0 +1,66 @@
+<html>
+	<head>
+		<style>
+			body { margin: 0; overflow: hidden; }
+			canvas { width: 100%; height: 100%; }
+		</style>
+		<script type="importmap">
+			{ "imports": {
+				"three": "https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js"
+			} }
+		</script>
+	</head>
+	<body>
+		<script type="module">
+		
+			import * as THREE from "three";			
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			renderer.setAnimationLoop( drawFrame );
+			document.body.appendChild( renderer.domElement );
+
+			var scene = new THREE.Scene();
+			
+			var aspect = window.innerWidth/window.innerHeight;
+			var camera = new THREE.PerspectiveCamera( 40, aspect );
+			camera.position.set( 6, 2, 20);
+			camera.lookAt( scene.position );		
+
+
+			var light = new THREE.PointLight( 'white', 200 );
+			light.position.set( 3, 7, 9 );
+			scene.add( light );
+
+			light = new THREE.PointLight( 'white', 200 );
+			light.position.set( 3, 7, -9 );
+			scene.add( light );
+
+            var ogradka = new THREE.Group();
+            scene.add(ogradka);
+
+            var geometry = new THREE.BoxGeometry(0.25, 2, 0.25);
+            var material = new THREE.MeshPhongMaterial();
+            material.color.set(0xfc1380); 
+            var prychka = new THREE.Mesh(geometry, material);
+            prychka.position.set(0, 0, 0)		
+            ogradka.add(prychka);
+
+            var geometry = new THREE.SphereGeometry(0.3, 32, 32);
+            var material = new THREE.MeshPhongMaterial();
+            material.color.set(0xfc68ae); 
+            var topche = new THREE.Mesh(geometry, material);
+            topche.position.set(0, 1, 0)		
+            ogradka.add(topche);
+
+            scene.add(ogradka);
+
+			scene.background = new THREE.Color(0xadd8e6);
+			function drawFrame( t )
+			{
+				scene.rotation.y = t/2000;
+				renderer.render( scene, camera );
+			}
+			
+		</script>
+	</body>
+</html>

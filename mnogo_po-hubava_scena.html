@@ -305,6 +305,40 @@
             scene.add(people_1);
             scene.add(people_2);}           
 
+            function draw_one_ogradka(x, y, z)
+            {
+                var ogradka = new THREE.Group();
+                scene.add(ogradka);
+
+                var geometry = new THREE.BoxGeometry(0.25, 2, 0.25);
+                var material = new THREE.MeshPhongMaterial();
+                material.color.set(0xfc1380); 
+                var prychka = new THREE.Mesh(geometry, material);
+                prychka.position.set(0, 0, 0)		
+                ogradka.add(prychka);
+
+                var geometry = new THREE.SphereGeometry(0.3, 32, 32);
+                var material = new THREE.MeshPhongMaterial();
+                material.color.set(0xfc68ae); 
+                var topche = new THREE.Mesh(geometry, material);
+                topche.position.set(0, 1, 0)		
+                ogradka.add(topche);
+
+                scene.add(ogradka);
+                ogradka.position.set(x, y, z);
+                return ogradka;
+            }
+
+
+            const numberOfObjects = 20;
+            const radius = 20;
+            for (let i = 0; i < numberOfObjects; i++) {
+                const angle = (i / numberOfObjects) * Math.PI * 2;
+
+                const x = Math.cos(angle) * radius + 3;
+                const z = Math.sin(angle) * radius - 3;
+                draw_one_ogradka(x, 1, z);
+            }
 
             scene.background = new THREE.Color(0xadd8e6);
 			function drawFrame(t)
